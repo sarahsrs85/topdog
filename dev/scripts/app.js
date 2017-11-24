@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import JokeItem from './JokeItem';
-// import Header from './header';
+import Header from './header';
 // import Footer from './footer';
 
 
@@ -17,13 +17,12 @@ const config = {
     
 firebase.initializeApp(config);
 
-
 class App extends React.Component {
       constructor() {
         super();
         this.state = {
           jokes: [{
-            jokeIdea: "test",
+            jokeIdea: "",
             jokeBeats: "",
             
           }],
@@ -34,6 +33,29 @@ class App extends React.Component {
       this.addJoke = this.addJoke.bind(this);
       this.removeJoke = this.removeJoke.bind(this); 
     }
+    componentDidMount() {
+      const dbRef = firebase.database().ref();
+      
+      firebase.auth().onAuthStateChanged((user) => {
+        if(user) {
+        dbRef.on("value", (firebaseData) => {
+          const jokesArray = [];
+          const jokesData = firebaseData.val();
+
+          for (let jokeKey in jokesData) {
+            jokesData[jokeKey].key = jokeKey;
+            jokesArray.push(jokesData[jokeKey]);
+          }
+            this.setState({
+              jokes: jokesArray
+            })
+          })
+        }
+        else {
+          console.log("You are signed out")
+        }
+      })//closes on auth state change
+    }//did mount
     handleChange(e) {
       console.log(e.target.value)
         //the target is the actual thing that the event occurs on
@@ -45,32 +67,32 @@ class App extends React.Component {
     }
     addJoke(e) {
       e.preventDefault();
-
       const jokeState = Array.from(this.state.jokes);
-      jokeState.push({
+      //userItem in video
+      const joke ={
         jokeIdea: this.state.jokeIdea, 
         jokeBeats: this.state.jokeBeats,
-      });
-      
+      };
+      //jokestate  remove this line once pulling from firebase
+      jokeState.push(joke);
+
       this.setState({
-        jokes: jokeState,
         jokeIdea: "",
         jokeBeats: "",
       });
+      const dbRef = firebase.database().ref();
+      dbRef.push(joke);
+      console.log(joke);
     }
     removeJoke(index) {
-      const  jokeState = Array.from(this.state.jokes);
-      jokeState.splice(index,1);
-      this.setState({
-        jokes: jokeState
-      });
+      const dbRef = firebase.database().ref(index);
+      dbRef.remove();
     }
     render() {
       return (
         <div>
-          <header>
-            <h1>Jokes</h1>
-          </header>
+          <Header />
+
           <form onSubmit={this.addJoke}>
             <label htmlFor="jokeIdea">Joke Premise</label>
             <input type="text" name="jokeIdea" value={this.state.jokeIdea} onChange={this.handleChange} />
@@ -83,7 +105,7 @@ class App extends React.Component {
             {this.state.jokes.map((joke, i) => {
                 return (
                   <div>
-                    <JokeItem data={joke} key={`joke-${i}`} remove={this.removeJoke} jokeIndex={i} />
+                    <JokeItem data={joke} key={joke.key} remove={this.removeJoke} jokeIndex={i} />
                   </div>
                 )
               console.log(data)
