@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import JokeItem from './JokeItem';
+// import JokeItem from './JokeItem';
 // import Header from './header';
 // import Footer from './footer';
 
@@ -18,7 +18,7 @@ const config = {
 		firebase.initializeApp(config);
 
 
- class App extends React.Component {
+class App extends React.Component {
       constructor() {
         super();
         this.state = {
@@ -35,7 +35,8 @@ const config = {
     handleChange(e) {
         //the target is the actual thing that the event occurs on
         this.setState({
-          joke: e.target.value
+          [e.target.name]: e.target.value
+        //can be used for different inputs just make sure name prop makes
         //everytime it changes we update this
         });
     }
@@ -79,8 +80,16 @@ const config = {
         </div>
       )
     }
- }
+}
 
+class JokeItem extends React.Component {
+  render() {
+    return (
+      <li className="joke-item">{this.props.data.jokeIdea} <button onClick={() => this.props.remove(this.props.jokeIndex)}>X</button></li>
+      // <li >{this.props.data.bio}</li>
+    );
+  }
+};
 
 //if you use it more than once make it a component 
 // you can have state on other components that app can do it on modules

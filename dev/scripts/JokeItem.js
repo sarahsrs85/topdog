@@ -1,9 +1,11 @@
-import React from 'react';
+// import React from 'react';
 
 
-export default function JokeItem(props) {
-        return (
-            <li className="joke-item">{props.data.jokeIdea} <button onClick={() =>  props.remove(props.jokeIndex)}>X</button> </li>
-            // <li >{this.props.data.bio}</li>
-        )
-    }
+// export default class JokeItem extends React.Component {
+//     render() {
+//         return (
+//             <li className="joke-item">{this.props.data.jokeIdea} <button onClick={() =>  props.remove(this.props.jokeIndex)}>X</button></li>
+//             // <li >{this.props.data.bio}</li>
+//         );
+//     }
+// };
