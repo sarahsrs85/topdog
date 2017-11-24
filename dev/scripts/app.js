@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import JokeItem from './JokeItem';
+import JokeItem from './JokeItem';
 // import Header from './header';
 // import Footer from './footer';
 
@@ -15,7 +15,7 @@ const config = {
 			messagingSenderId: "829961190817"
 };
     
-		firebase.initializeApp(config);
+firebase.initializeApp(config);
 
 
 class App extends React.Component {
@@ -23,16 +23,19 @@ class App extends React.Component {
         super();
         this.state = {
           jokes: [{
-            jokeIdea: "this sucks",
-            jokeBeat: ""
+            jokeIdea: "test",
+            jokeBeats: "",
+            
           }],
-          joke:""
+          jokeIdea:"",
+          jokeBeats:""
       }
       this.handleChange = this.handleChange.bind(this);
       this.addJoke = this.addJoke.bind(this);
       this.removeJoke = this.removeJoke.bind(this); 
     }
     handleChange(e) {
+      console.log(e.target.value)
         //the target is the actual thing that the event occurs on
         this.setState({
           [e.target.name]: e.target.value
@@ -45,13 +48,14 @@ class App extends React.Component {
 
       const jokeState = Array.from(this.state.jokes);
       jokeState.push({
-        jokeIdea: this.state.joke, 
-        jokeBeat: this.state.joke
+        jokeIdea: this.state.jokeIdea, 
+        jokeBeats: this.state.jokeBeats,
       });
       
       this.setState({
         jokes: jokeState,
-        joke: ""
+        jokeIdea: "",
+        jokeBeats: "",
       });
     }
     removeJoke(index) {
@@ -68,13 +72,21 @@ class App extends React.Component {
             <h1>Jokes</h1>
           </header>
           <form onSubmit={this.addJoke}>
-            <input type="text" name="joke" value={this.state.joke} onChange={this.handleChange} />
+            <label htmlFor="jokeIdea">Joke Premise</label>
+            <input type="text" name="jokeIdea" value={this.state.jokeIdea} onChange={this.handleChange} />
+            <label htmlFor="jokeBeats">Beat</label>
+            <input type="textarea" name="jokeBeats" value={this.state.jokeBeats} onChange={this.handleChange} />
+            
             <button>Add Joke</button>
           </form>
           <ul>
             {this.state.jokes.map((joke, i) => {
-                return <JokeItem data={joke} key={`joke-${i}`} remove={this.removeJoke} jokeIndex={i} />
-                   {/* <li key={`joke-${i}`}>{joke.jokeIdea}</li> */}
+                return (
+                  <div>
+                    <JokeItem data={joke} key={`joke-${i}`} remove={this.removeJoke} jokeIndex={i} />
+                  </div>
+                )
+              console.log(data)
             })}
           </ul>
         </div>
@@ -82,14 +94,7 @@ class App extends React.Component {
     }
 }
 
-class JokeItem extends React.Component {
-  render() {
-    return (
-      <li className="joke-item">{this.props.data.jokeIdea} <button onClick={() => this.props.remove(this.props.jokeIndex)}>X</button></li>
-      // <li >{this.props.data.bio}</li>
-    );
-  }
-};
+
 
 //if you use it more than once make it a component 
 // you can have state on other components that app can do it on modules
