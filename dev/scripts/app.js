@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import JokeItem from './JokeItem';
 import Header from './header';
-// import Footer from './footer';
+import Footer from './footer';
 
 
   // Initialize Firebase
@@ -84,7 +84,7 @@ class App extends React.Component {
       dbRef.push(joke);
       console.log(joke);
     }
-    removeJoke(index) {
+    removeJoke(index) { 
       const dbRef = firebase.database().ref(index);
       dbRef.remove();
     }
@@ -93,24 +93,23 @@ class App extends React.Component {
         <div>
           <Header />
 
-          <form onSubmit={this.addJoke}>
+          <form className="addJoke" onSubmit={this.addJoke}>
             <label htmlFor="jokeIdea">Joke Premise</label>
             <input type="text" name="jokeIdea" value={this.state.jokeIdea} onChange={this.handleChange} />
-            <label htmlFor="jokeBeats">Beat</label>
-            <input type="textarea" name="jokeBeats" value={this.state.jokeBeats} onChange={this.handleChange} />
+            <label htmlFor="jokeBeats">Notes</label>
+            <textarea name="jokeBeats" value={this.state.jokeBeats} onChange={this.handleChange} />
             
             <button>Add Joke</button>
           </form>
-          <ul>
+          <ul className="mainContent">
             {this.state.jokes.map((joke, i) => {
                 return (
-                  <div>
                     <JokeItem data={joke} key={joke.key} remove={this.removeJoke} jokeIndex={i} />
-                  </div>
                 )
               console.log(data)
             })}
           </ul>
+          <Footer />
         </div>
       )
     }
