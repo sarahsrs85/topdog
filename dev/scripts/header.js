@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 
@@ -28,20 +29,27 @@ export default class Header extends React.Component {
     }
     signup(e) {
         e.preventDefault();
-        if(this.state.password === this.state.confirm);
-            firebase.auth()
-            .createUserWithEmailAndPassword(this.state.email,this.state.password)
-            .then((data) => {
-                
-            });
+        if (this.state.password === this.state.confirm) {
+        firebase.auth()
+            .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            .then((results) => {
+                this.userForm.classList.toggle('hide');
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
+        }
+        else {
+            alert("Passwords must  match")
+        }
     }
     login(e) {
         e.preventDefault();
         firebase.auth()
-        .signInWithEmailAndPassword(this.state.email,this.state.password)
-        .then((data) => {
-                
-        });
+            .signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then((data) => {
+
+            });
 
     }
     render() {
@@ -49,7 +57,7 @@ export default class Header extends React.Component {
         let loginForm = '';
         if (this.state.formToShow === 'signup') {
             loginForm = (
-                <form onSubmit={this.signup} className="user-form">
+                <form onSubmit={this.signup} className="user-form userForm">
                     <div>
                         <label htmlFor="email">Email: </label>
                         <input type="email" name="email" onChange={this.handleChange} />
@@ -59,10 +67,10 @@ export default class Header extends React.Component {
                         <input type="password" name="password" onChange={this.handleChange} />
                     </div>
                     <div>
-                    <label htmlFor="confirm">Confirm Password:</label>
-                    <input type="password" name="confirm" onChange={this.handleChange} />
+                        <label htmlFor="confirm">Confirm Password:</label>
+                        <input type="password" name="confirm" onChange={this.handleChange} />
                     </div>
-                    <button>Sign In</button>
+                    <button className="button">Sign In</button>
                 </form>
             );
         }
@@ -77,15 +85,15 @@ export default class Header extends React.Component {
                         <label htmlFor="password">Password: </label>
                         <input type="password" name="password" onChange={this.handleChange} />
                     </div>
-                    <button>Log In</button>
-                    
+                    <button className="button">Log In</button>
+
                 </form>
             );
         }
-         return (
+        return (
             <div>
                 <header>
-                     <h1 className="font-effect-neon">Joke Book</h1>
+                    <h1 className="font-effect-neon">Joke Book</h1>
                     <nav>
                         <ul>
                             <li><a href="" className="signup" onClick={this.formToShow}>Sign Up</a></li>

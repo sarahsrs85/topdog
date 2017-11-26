@@ -9,13 +9,13 @@ render() {
                 <h2>
                 {this.props.data.jokeIdea}
                 </h2>
-                <button onClick={() => this.props.remove(this.props.data.key)}>
-                X
+                <button className="delete" onClick={() => this.props.remove(this.props.data.key)}>
+                    <i className="fa fa-trash-o" aria-hidden="true"></i>
                 </button>
             </div>
-            <li>
+            <p>
             {this.props.data.jokeBeats} 
-            </li>
+            </p>
         </div>
         );
     }

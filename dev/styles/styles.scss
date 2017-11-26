@@ -7,6 +7,7 @@ html {
 }
 body {
     background-color:#1d2228;
+    font-family: 'Raleway', sans-serif;
 }
 p {
     color: rgb(239, 235, 239);
@@ -14,6 +15,27 @@ p {
 }
 a {
     text-decoration: none;
+    &:visited, &:active {
+        color:rgb(239, 235, 239);
+    }
+    &:hover {
+        color:rgb(202, 129, 202),
+    }
+}
+.button {
+    background: rgb(48, 50, 64);
+    font-size: 1.8rem;
+    color: rgb(239, 235, 239);
+    // text-transform: uppercase;
+    box-shadow: 
+    0px 50px 45px -15px rgba(0,0,0,.5),
+    0px 20px 10px -5px rgba(0,0,0,.5),
+    0px 5px 20px 0px rgba(0,0,0,.5),
+    0px 10px 40px rgba(0,0,0,.7) inset ;
+    border: 4px solid lighten(rgb(0, 0, 0), 12%);
+    border-top: 4px solid black;
+    border-bottom: 5px solid lighten(black, 16%);
+    color:rgb(239, 235, 239);
     &:visited, &:active {
         color:rgb(239, 235, 239);
     }
@@ -77,6 +99,7 @@ li {
     border-top: 4px solid black;
     border-bottom: 5px solid lighten(black, 16%);
     color:rgb(239, 235, 239);
+    z-index:15;
     div {
         margin-left: 20px;
         padding: 15px;
@@ -108,6 +131,9 @@ li {
         input {
             height: 25px;
         }
+        .button {
+            height: 4.5rem;
+        }
 
 }
 .mainContent {
@@ -128,15 +154,25 @@ li {
     border-radius: 5px;
     color: rgb(239, 235, 239);
     padding: 20px;
-    
-    
 
-    
     .title {
         display: flex;
-        //justify-content: space-around;
+        text-transform: uppercase;
+        justify-content: space-between;
         align-items: baseline;
-
+        font-size: 1.4rem;
+        h2 {
+            margin: 0;
+            position: relative;
+        }
+        h2::before {
+        content: "";
+        position: absolute;
+        height: 5px;
+        border-bottom: 1px solid rgb(233, 235, 237);
+        bottom: -5px;
+        width: 80%;
+        }
         button {
             width: 20px;
             height: 20px;
@@ -162,10 +198,22 @@ footer {
     text-decoration: none;
     background-color:#1d2228;
 }
-
+.delete {
+    background: transparent;
+    border: transparent;
+    .fa.fa-trash-o {
+        font-size: 20px;
+        color: rgb(239, 235, 239); 
+        &:hover {
+        color:rgb(202, 129, 202),
+        }  
+    }
+}
+.hide {
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.3s ease;
+	position: absolute;
+}
 // to do
 //make responsive
-// get better x
-//style joke button
-// pick font 
-//pick font sizes

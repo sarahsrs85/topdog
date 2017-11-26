@@ -92,21 +92,19 @@ class App extends React.Component {
       return (
         <div>
           <Header />
-
           <form className="addJoke" onSubmit={this.addJoke}>
             <label htmlFor="jokeIdea">Joke Premise</label>
             <input type="text" name="jokeIdea" value={this.state.jokeIdea} onChange={this.handleChange} />
             <label htmlFor="jokeBeats">Notes</label>
             <textarea name="jokeBeats" value={this.state.jokeBeats} onChange={this.handleChange} />
             
-            <button>Add Joke</button>
+            <button className="button">Add Joke</button>
           </form>
           <ul className="mainContent">
             {this.state.jokes.map((joke, i) => {
                 return (
                     <JokeItem data={joke} key={joke.key} remove={this.removeJoke} jokeIndex={i} />
                 )
-              console.log(data)
             })}
           </ul>
           <Footer />
