@@ -28,12 +28,15 @@ export default class Header extends React.Component {
         });
     }
     signup(e) {
+       
         e.preventDefault();
+        const userForm = document.querySelector('.userForm')
         if (this.state.password === this.state.confirm) {
         firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((results) => {
-                this.userForm.classList.toggle('hide');
+               
+                userForm.classList.toggle('hide');
             })
             .catch((error) => {
                 alert(error.message)
@@ -45,12 +48,15 @@ export default class Header extends React.Component {
     }
     login(e) {
         e.preventDefault();
+        const userForm = document.querySelector('.userForm')
         firebase.auth()
             .signInWithEmailAndPassword(this.state.email, this.state.password)
-            .then((data) => {
-
-            });
-
+            .then((results) => {
+                userForm.classList.toggle('hide');
+            })
+            .catch((error) => {
+                alert(error.message)
+            })
     }
     render() {
         //trick at the very begining keep an empty string
