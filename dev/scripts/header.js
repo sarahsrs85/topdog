@@ -35,7 +35,6 @@ export default class Header extends React.Component {
         firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then((results) => {
-               
                 userForm.classList.toggle('hide');
             })
             .catch((error) => {
@@ -49,6 +48,7 @@ export default class Header extends React.Component {
     login(e) {
         e.preventDefault();
         const userForm = document.querySelector('.userForm')
+        
         firebase.auth()
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then((results) => {
@@ -82,7 +82,7 @@ export default class Header extends React.Component {
         }
         else if (this.state.formToShow === "login") {
             loginForm = (
-                <form onSubmit={this.login} className="user-form">
+                <form onSubmit={this.login} className="user-form userForm">
                     <div>
                         <label htmlFor="email">Email: </label>
                         <input type="email" name="email" onChange={this.handleChange} />

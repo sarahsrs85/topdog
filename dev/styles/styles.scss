@@ -46,7 +46,7 @@ a {
 header{
     display: flex;
     font-size: 2.5rem;
-    height: 15vh;
+    min-height: 15vh;
     align-items: center;
     background: #2D314B ;
     box-shadow: 
@@ -154,6 +154,9 @@ li {
     border-radius: 5px;
     color: rgb(239, 235, 239);
     padding: 20px;
+    p {
+        width: 98%;
+    }
 
     .title {
         display: flex;
@@ -180,16 +183,16 @@ li {
     }
 }
 .card-1 {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 .card-1:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .font-effect-neon {
-  text-shadow: 0 0 0.1em #fff, 0 0 0.2em #fff, 0 0 0.3em #fff, 0 0 0.4em #f7f,0 0 0.6em #f0f, 0 0 0.8em #f0f, 0 0 1.0em #f0f, 0 0 1.2em #db00db;
-  color: #fff;
+    text-shadow: 0 0 0.1em #fff, 0 0 0.2em #fff, 0 0 0.3em #fff, 0 0 0.4em #f7f,0 0 0.6em #f0f, 0 0 0.8em #f0f, 0 0 1.0em #f0f, 0 0 1.2em #db00db;
+    color: #fff;
 }
 
 footer {
@@ -215,5 +218,54 @@ footer {
 	transition: all 0.3s ease;
 	position: absolute;
 }
-// to do
-//make responsive
+//responsive 
+/* Portrait tablet and small desktops */
+@media (max-width: 940px) {
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 768px) {
+    h1 {
+        width: 33.3%;
+    }
+    .user-form {
+        width: 80%;
+        div{
+            margin: 0;
+            width: 100%;
+        }
+    }
+    .addJoke {
+        flex-direction: column;
+        width: 60%;
+        .button {
+            width: 30%;
+            margin: 15px auto;
+        }
+    }
+    .joke-item {
+    width: calc(50% - 20px);
+    }
+}
+/* Landscape phones and down */
+@media (max-width: 480px) {
+    header {
+        flex-direction: column;
+        h1 {
+        width:100%;
+        margin-bottom: 0;
+        }
+        nav {
+            width: 98%;
+        }
+    }
+    .addJoke {
+        width: 80%;
+    }
+    .addJoke .button {
+        height: 60px;
+    }
+    .joke-item {
+    width: 100%;
+    }
+}
